@@ -236,15 +236,6 @@ section:nth-of-type(even) {
   gap: 0.6rem;
 }
 
-.service-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--yellow);
-  border: 2px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  display: inline-block;
-}
 
 .service-card h3 {
   margin-top: 0;
