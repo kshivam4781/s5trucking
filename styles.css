@@ -59,13 +59,13 @@ main {
 }
 
 .logo img {
-  width: 56px;
-  height: 56px;
+  width: clamp(70px, 8vw, 100px);
+  height: clamp(70px, 8vw, 100px);
   object-fit: contain;
 }
 
 .logo-text span {
-  font-size: 1.1rem;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
   font-weight: 700;
 }
 
@@ -444,14 +444,88 @@ section:nth-of-type(even) {
   font-weight: 700;
 }
 
+/* Tablet and below */
+@media (max-width: 968px) {
+  .top-bar {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .header-contact {
+    text-align: left;
+    width: 100%;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 2rem 2vw 3rem;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+
+  .coverage-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .call-highlight {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+}
+
+/* Mobile */
 @media (max-width: 700px) {
   .top-bar {
     flex-direction: column;
-    gap: 0.5rem;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .logo {
+    width: 100%;
+  }
+
+  .header-contact {
+    width: 100%;
+  }
+
+  .phone-link {
+    font-size: 2rem;
+  }
+
+  .hero {
+    padding: 1.5rem 2vw 2rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
   }
 
   .hero-actions {
     flex-direction: column;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .service-grid,
+  .benefits-grid,
+  .gallery-grid,
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .sticky-phone {
@@ -460,6 +534,44 @@ section:nth-of-type(even) {
     width: calc(100% - 2rem);
     justify-content: center;
     text-align: center;
+  }
+
+  section {
+    padding: 1.5rem 2vw;
+  }
+
+  .container {
+    width: min(1200px, 95vw);
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .logo img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .logo-text span {
+    font-size: 1rem;
+  }
+
+  .phone-link {
+    font-size: 1.6rem;
+  }
+
+  .hero-text h1 {
+    font-size: 1.75rem;
+  }
+
+  .section-title h2,
+  .intro h2 {
+    font-size: 1.75rem;
+  }
+
+  .btn {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
   }
 }
 
