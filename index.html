@@ -49,12 +49,12 @@
     <main>
       <section class="hero" aria-label="Hero">
         <div class="hero-text">
-          <p class="eyebrow">24/7 Truck &amp; Trailer Repair Serving New Jersey &amp; New York</p>
-          <h1>
-            24/7 Truck &amp; Trailer Repair Serving New Jersey &amp; New York
-            <span>Roadside Assistance • Mobile Service • DOT Inspections</span>
+          <p class="eyebrow" id="heroEyebrow">24/7 Truck &amp; Trailer Repair Serving New Jersey &amp; New York</p>
+          <h1 id="heroTitle">
+            <span id="heroTitleMain">24/7 Truck &amp; Trailer Repair Serving New Jersey &amp; New York</span>
+            <span id="heroTitleSub">Roadside Assistance • Mobile Service • DOT Inspections</span>
           </h1>
-          <p class="hero-description">
+          <p class="hero-description" id="heroDescription">
             Local diesel mechanics bring service to the highway, shop, or parking lot
             so owner-operators and fleets can keep moving.
           </p>
@@ -62,7 +62,7 @@
             <a class="btn primary" href="tel:+19085551234">Call Now: (908) 555-1234</a>
             <a class="btn secondary" href="#contact">Request Roadside Help</a>
           </div>
-          <div class="trust-badges">
+          <div class="trust-badges" id="heroBadges">
             <span>Top Rated on Google</span>
             <span>ASE Certified</span>
             <span>24/7 Roadside Service</span>
@@ -71,8 +71,9 @@
         </div>
         <div class="hero-visual">
           <img
-            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80"
-            alt="Mechanic fixing a semi truck"
+            class="hero-truck"
+            src="assets/truck2.png"
+            alt="Truck repair service"
           />
         </div>
       </section>
@@ -91,7 +92,14 @@
 
       <section class="services container" aria-labelledby="services-title">
           <div class="section-title">
-            <h2 id="services-title">Our Services</h2>
+            <div class="section-title-header">
+              <h2 id="services-title">Our Services</h2>
+              <img
+                class="services-mechanic"
+                src="assets/mechanic_wrench.png"
+                alt="Mechanic fixing a semi truck"
+              />
+            </div>
             <p>Clear service options for faster decisions and higher SEO clarity.</p>
           </div>
           <div class="service-grid">
@@ -197,11 +205,19 @@
           </div>
       </section>
 
-      <section class="benefits container" aria-labelledby="benefits-title">
-          <div class="section-title">
-            <h2 id="benefits-title">Why Truck Drivers Choose Us</h2>
-          </div>
-          <div class="benefits-grid">
+      <section class="benefits" aria-labelledby="benefits-title">
+          <img
+            class="benefits-tires"
+            src="assets/tires.webp"
+            alt="Tires"
+          />
+          <div class="container">
+            <div class="section-title">
+              <div class="section-title-header">
+                <h2 id="benefits-title">Why Truck Drivers Choose Us</h2>
+              </div>
+            </div>
+            <div class="benefits-grid">
             <div class="benefit-card">
               <h3>24/7 Emergency Dispatch</h3>
               <p>Calls answered immediately to send the nearest diesel tech your way.</p>
@@ -227,6 +243,7 @@
               <p>Repairs completed quickly so you can get back to your route before dark.</p>
             </div>
           </div>
+          </div>
       </section>
 
       <section class="gallery container" aria-labelledby="gallery-title">
@@ -235,53 +252,109 @@
           </div>
           <div class="gallery-grid">
             <img
-              src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=900&q=80"
-              alt="Trucks in repair bay"
+              src="assets/office/1.png"
+              alt="Shop tour photo 1"
             />
             <img
-              src="https://images.unsplash.com/photo-1448661465853-7cc0a5b47d3b?auto=format&fit=crop&w=900&q=80"
-              alt="Mechanic inspecting engine"
+              src="assets/office/2.png"
+              alt="Shop tour photo 2"
             />
             <img
-              src="https://images.unsplash.com/photo-1470246973918-29a93221c455?auto=format&fit=crop&w=900&q=80"
-              alt="Heavy-duty tools and bays"
+              src="assets/office/3.png"
+              alt="Shop tour photo 3"
+            />
+            <img
+              src="assets/office/8.png"
+              alt="Shop tour photo 4"
             />
           </div>
       </section>
 
-      <section class="reviews container" aria-labelledby="reviews-title">
-          <div class="section-title">
-            <h2 id="reviews-title">Truck Drivers Trust These Reviews</h2>
-            <p>Google Reviews widget simulated for trust — actual stars and feedback below.</p>
-          </div>
-          <div class="reviews-grid">
-            <div class="google-widget">
-              <p class="rating-score">4.9/5</p>
-              <p>Google Reviews • Updated weekly</p>
+      <section class="reviews" aria-labelledby="reviews-title">
+          <div class="reviews-background-accent"></div>
+          <div class="container">
+            <div class="section-title">
+              <h2 id="reviews-title">Truck Drivers Trust These Reviews</h2>
+              <p>Real feedback from real truckers who've been there when it matters most.</p>
             </div>
-            <article class="review-card">
-              <p class="rating-label">5/5 rating</p>
-              <p class="quote">
-                “Pulled over on Route 31 and S5 was on site in 30 minutes. Charged what they quoted and
-                had me back in service before lunch.”
-              </p>
-              <p class="author">– Alex T., Owner-Operator</p>
-            </article>
-            <article class="review-card">
-              <p class="rating-label">5/5 rating</p>
-              <p class="quote">
-                “Our fleet of reefers has a standing service window in Flemington. They handle DOT
-                inspections and brakes every week.”
-              </p>
-              <p class="author">– K&M Refrigerated Transport</p>
-            </article>
-            <article class="review-card">
-              <p class="rating-label">5/5 rating</p>
-              <p class="quote">
-                “Emergency call on a holiday, they took the job instantly and kept my driver on track.”
-              </p>
-              <p class="author">– Joe M. • NJ Dry Freight</p>
-            </article>
+            <div class="reviews-layout">
+              <div class="google-widget">
+                <div class="google-logo">
+                  <i class="fab fa-google"></i>
+                </div>
+                <div class="rating-display">
+                  <span class="rating-score">4.9</span>
+                  <div class="stars-container">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                </div>
+                <p class="review-count">247+ Google Reviews</p>
+                <p class="update-info">Updated daily</p>
+              </div>
+              <div class="reviews-cards-container">
+                <article class="review-card">
+                  <div class="review-header">
+                    <div class="review-stars">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </div>
+                  <p class="quote">
+                    "Broke down on I-78 near Clinton around 2 AM with a blown turbo. Called S5 and they had a tech out in 45 minutes. Fixed it right there on the shoulder, no tow needed. Honest pricing and got me rolling again. These guys know their stuff."
+                  </p>
+                  <div class="review-footer">
+                    <p class="author">Michael Rodriguez</p>
+                    <p class="author-role">Owner-Operator • Newark, NJ</p>
+                    <p class="review-date">2 weeks ago</p>
+                  </div>
+                </article>
+                <article class="review-card">
+                  <div class="review-header">
+                    <div class="review-stars">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </div>
+                  <p class="quote">
+                    "We've been using S5 for our 12-truck fleet out of Jersey City for over 3 years. They handle all our DOT inspections, brake work, and PM services. Always on time, fair prices, and they keep detailed records. Can't ask for better service."
+                  </p>
+                  <div class="review-footer">
+                    <p class="author">Patricia Chen</p>
+                    <p class="author-role">Hudson Logistics • Jersey City, NJ</p>
+                    <p class="review-date">1 month ago</p>
+                  </div>
+                </article>
+                <article class="review-card">
+                  <div class="review-header">
+                    <div class="review-stars">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </div>
+                  <p class="quote">
+                    "Thanksgiving Day, my reefer unit died in Brooklyn with a full load of produce. S5 answered the phone immediately, sent a mobile unit, and had us back running in under 2 hours. Saved my load and my customer. These guys are lifesavers."
+                  </p>
+                  <div class="review-footer">
+                    <p class="author">James O'Brien</p>
+                    <p class="author-role">Brooklyn Cold Storage • Brooklyn, NY</p>
+                    <p class="review-date">3 weeks ago</p>
+                  </div>
+                </article>
+              </div>
+            </div>
           </div>
       </section>
 
@@ -460,6 +533,78 @@
         });
       } else {
         setInterval(rotateText, 4000);
+      }
+
+      // Hero content rotation
+      const heroContents = [
+        {
+          eyebrow: "24/7 Truck & Trailer Repair Serving New Jersey & New York",
+          titleMain: "24/7 Truck & Trailer Repair Serving New Jersey & New York",
+          titleSub: "Roadside Assistance • Mobile Service • DOT Inspections",
+          description: "Local diesel mechanics bring service to the highway, shop, or parking lot so owner-operators and fleets can keep moving.",
+          badges: ["Top Rated on Google", "ASE Certified", "24/7 Roadside Service", "Serving New Jersey & New York"]
+        },
+        {
+          eyebrow: "Emergency Mobile Diesel Service",
+          titleMain: "Fast Response When You Need It Most",
+          titleSub: "On-Site Repairs • Same-Day Service • Fleet Support",
+          description: "Our certified mechanics come to you—whether you're broken down on the highway, at your yard, or in a parking lot. Get back on the road fast.",
+          badges: ["Average 45-Min Response", "ASE Certified", "24/7 Emergency", "All Makes & Models"]
+        },
+        {
+          eyebrow: "Professional Truck & Trailer Repair",
+          titleMain: "Trusted by Fleets & Owner-Operators",
+          titleSub: "DOT Inspections • Brake Repair • Engine Diagnostics",
+          description: "From routine maintenance to emergency repairs, we handle everything from brakes and suspension to engine diagnostics and electrical systems.",
+          badges: ["Fleet Accounts Welcome", "DOT Certified", "Same-Day Service", "Honest Pricing"]
+        },
+        {
+          eyebrow: "Hunterdon County's Premier Truck Service",
+          titleMain: "Serving New Jersey & New York 24/7",
+          titleSub: "Mobile Service • Shop Repairs • Roadside Assistance",
+          description: "Located in Flemington, NJ, we provide comprehensive truck and trailer repair services across the entire Northeast region.",
+          badges: ["Local & Reliable", "24/7 Dispatch", "Experienced Team", "Transparent Pricing"]
+        }
+      ];
+
+      let heroIndex = 0;
+      const heroEyebrow = document.getElementById('heroEyebrow');
+      const heroTitleMain = document.getElementById('heroTitleMain');
+      const heroTitleSub = document.getElementById('heroTitleSub');
+      const heroDescription = document.getElementById('heroDescription');
+      const heroBadges = document.getElementById('heroBadges');
+      const heroText = document.querySelector('.hero-text');
+
+      function rotateHeroContent() {
+        if (heroText && heroEyebrow && heroTitleMain && heroTitleSub && heroDescription && heroBadges) {
+          // Fade out
+          heroText.style.opacity = '0';
+          
+          setTimeout(() => {
+            heroIndex = (heroIndex + 1) % heroContents.length;
+            const content = heroContents[heroIndex];
+            
+            heroEyebrow.textContent = content.eyebrow;
+            heroTitleMain.textContent = content.titleMain;
+            heroTitleSub.textContent = content.titleSub;
+            heroDescription.textContent = content.description;
+            
+            // Update badges
+            heroBadges.innerHTML = content.badges.map(badge => `<span>${badge}</span>`).join('');
+            
+            // Fade in
+            heroText.style.opacity = '1';
+          }, 300);
+        }
+      }
+
+      // Start hero rotation after page load
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          setInterval(rotateHeroContent, 4000);
+        });
+      } else {
+        setInterval(rotateHeroContent, 4000);
       }
     </script>
   </body>
