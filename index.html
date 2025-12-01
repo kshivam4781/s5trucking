@@ -30,7 +30,12 @@
             <small>Flemington, NJ</small>
           </div>
         </div>
-        <nav class="main-nav">
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="main-nav" id="mainNav">
           <a href="index.html">Home</a>
           <div class="nav-dropdown">
             <a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
@@ -128,6 +133,13 @@
             <img src="assets/newjersey.png" alt="New Jersey" />
             <img src="assets/newyork.png" alt="New York" />
           </div>
+          <img
+            id="heroOwner"
+            class="hero-owner"
+            src="assets/images/owner.jpg"
+            alt="Owner"
+            style="display: none;"
+          />
         </div>
       </section>
 
@@ -215,33 +227,33 @@
             <p>Expert service for all major truck brands and models.</p>
           </div>
           <div class="manufacturers-grid">
-            <div class="manufacturer-logo">
+            <a href="trucks.html#freightliner" class="manufacturer-logo">
               <img src="assets/images/manufacturers/freightlines.svg" alt="Freightliner" />
-            </div>
-            <div class="manufacturer-logo">
+            </a>
+            <a href="trucks.html#hino" class="manufacturer-logo">
               <img src="assets/images/manufacturers/hino.svg" alt="Hino" />
-            </div>
-            <div class="manufacturer-logo">
+            </a>
+            <a href="trucks.html#international" class="manufacturer-logo">
               <img src="assets/images/manufacturers/international.svg" alt="International" />
-            </div>
-            <div class="manufacturer-logo">
+            </a>
+            <a href="trucks.html#isuzu" class="manufacturer-logo">
               <img src="assets/images/manufacturers/isuzu.svg" alt="Isuzu" />
-            </div>
-            <div class="manufacturer-logo">
+            </a>
+            <a href="trucks.html#kenworth" class="manufacturer-logo">
               <img src="assets/images/manufacturers/kenworth.svg" alt="Kenworth" />
-            </div>
-            <div class="manufacturer-logo">
+            </a>
+            <a href="trucks.html#mack" class="manufacturer-logo">
               <img src="assets/images/manufacturers/mack.svg" alt="Mack" />
-            </div>
-            <div class="manufacturer-logo">
+            </a>
+            <a href="trucks.html#peterbilt" class="manufacturer-logo">
               <img src="assets/images/manufacturers/peterbilt.svg" alt="Peterbilt" />
-            </div>
-            <div class="manufacturer-logo">
+            </a>
+            <a href="trucks.html#volvo" class="manufacturer-logo">
               <img src="assets/images/manufacturers/volvo.svg" alt="Volvo" />
-            </div>
-            <div class="manufacturer-logo">
+            </a>
+            <a href="trucks.html#western-star" class="manufacturer-logo">
               <img src="assets/images/manufacturers/western_star.svg" alt="Western Star" />
-            </div>
+            </a>
           </div>
       </section>
 
@@ -669,6 +681,7 @@
       const heroText = document.querySelector('.hero-text');
       const heroTruck = document.getElementById('heroTruck');
       const heroStateImages = document.getElementById('heroStateImages');
+      const heroOwner = document.getElementById('heroOwner');
 
       function rotateHeroContent() {
         if (heroText && heroEyebrow && heroTitleMain && heroTitleSub && heroDescription && heroBadges) {
@@ -679,6 +692,9 @@
           }
           if (heroStateImages) {
             heroStateImages.style.opacity = '0';
+          }
+          if (heroOwner) {
+            heroOwner.style.opacity = '0';
           }
           
           setTimeout(() => {
@@ -693,13 +709,37 @@
             // Update badges
             heroBadges.innerHTML = content.badges.map(badge => `<span>${badge}</span>`).join('');
             
-            // Check if content mentions New Jersey or New York
-            const showStates = content.titleMain.includes('New Jersey') || content.titleMain.includes('New York') || 
-                              content.eyebrow.includes('New Jersey') || content.eyebrow.includes('New York');
+            // Check if this is the first slide (index 0) with "24/7 Truck & Trailer Repair Serving New Jersey & New York"
+            const isFirstSlide = heroIndex === 0 && 
+                                (content.titleMain.includes('24/7 Truck & Trailer Repair Serving New Jersey & New York') || 
+                                 content.eyebrow.includes('24/7 Truck & Trailer Repair Serving New Jersey & New York'));
             
-            // Show/hide state images or truck image based on content
-            if (showStates) {
-              // Show state images, hide truck
+            // Check if content mentions New Jersey or New York (but not the first slide)
+            const showStates = !isFirstSlide && 
+                              (content.titleMain.includes('New Jersey') || content.titleMain.includes('New York') || 
+                               content.eyebrow.includes('New Jersey') || content.eyebrow.includes('New York'));
+            
+            // Show/hide images based on content
+            if (isFirstSlide) {
+              // Show owner image for first slide, hide everything else
+              if (heroOwner) {
+                heroOwner.style.display = 'block';
+                setTimeout(() => {
+                  heroOwner.style.opacity = '1';
+                }, 50);
+              }
+              if (heroTruck) {
+                heroTruck.style.opacity = '0';
+                heroTruck.style.display = 'none';
+              }
+              if (heroStateImages) {
+                heroStateImages.style.opacity = '0';
+                setTimeout(() => {
+                  heroStateImages.style.display = 'none';
+                }, 300);
+              }
+            } else if (showStates) {
+              // Show state images, hide truck and owner
               if (heroStateImages) {
                 heroStateImages.style.display = 'flex';
                 setTimeout(() => {
@@ -710,8 +750,14 @@
                 heroTruck.style.opacity = '0';
                 heroTruck.style.display = 'none';
               }
+              if (heroOwner) {
+                heroOwner.style.opacity = '0';
+                setTimeout(() => {
+                  heroOwner.style.display = 'none';
+                }, 300);
+              }
             } else {
-              // Show truck, hide state images
+              // Show truck, hide state images and owner
               if (heroTruck && content.truckImage) {
                 heroTruck.src = content.truckImage;
                 heroTruck.style.display = 'block';
@@ -725,6 +771,12 @@
                   heroStateImages.style.display = 'none';
                 }, 300);
               }
+              if (heroOwner) {
+                heroOwner.style.opacity = '0';
+                setTimeout(() => {
+                  heroOwner.style.display = 'none';
+                }, 300);
+              }
             }
             
             // Fade in
@@ -736,27 +788,50 @@
       // Initialize images on page load
       function initializeHeroImages() {
         const initialContent = heroContents[0];
-        const showStates = initialContent.titleMain.includes('New Jersey') || initialContent.titleMain.includes('New York') || 
-                          initialContent.eyebrow.includes('New Jersey') || initialContent.eyebrow.includes('New York');
+        const isFirstSlide = initialContent.titleMain.includes('24/7 Truck & Trailer Repair Serving New Jersey & New York') || 
+                            initialContent.eyebrow.includes('24/7 Truck & Trailer Repair Serving New Jersey & New York');
         
-        if (showStates) {
-          // Show state images, hide truck
-          if (heroStateImages) {
-            heroStateImages.style.display = 'flex';
-            heroStateImages.style.opacity = '1';
+        if (isFirstSlide) {
+          // Show owner image for first slide
+          if (heroOwner) {
+            heroOwner.style.display = 'block';
+            heroOwner.style.opacity = '1';
           }
           if (heroTruck) {
             heroTruck.style.display = 'none';
           }
-        } else {
-          // Show truck, hide state images
-          if (heroTruck && initialContent.truckImage) {
-            heroTruck.src = initialContent.truckImage;
-            heroTruck.style.display = 'block';
-            heroTruck.style.opacity = '1';
-          }
           if (heroStateImages) {
             heroStateImages.style.display = 'none';
+          }
+        } else {
+          const showStates = initialContent.titleMain.includes('New Jersey') || initialContent.titleMain.includes('New York') || 
+                            initialContent.eyebrow.includes('New Jersey') || initialContent.eyebrow.includes('New York');
+          
+          if (showStates) {
+            // Show state images, hide truck and owner
+            if (heroStateImages) {
+              heroStateImages.style.display = 'flex';
+              heroStateImages.style.opacity = '1';
+            }
+            if (heroTruck) {
+              heroTruck.style.display = 'none';
+            }
+            if (heroOwner) {
+              heroOwner.style.display = 'none';
+            }
+          } else {
+            // Show truck, hide state images and owner
+            if (heroTruck && initialContent.truckImage) {
+              heroTruck.src = initialContent.truckImage;
+              heroTruck.style.display = 'block';
+              heroTruck.style.opacity = '1';
+            }
+            if (heroStateImages) {
+              heroStateImages.style.display = 'none';
+            }
+            if (heroOwner) {
+              heroOwner.style.display = 'none';
+            }
           }
         }
       }
@@ -770,6 +845,38 @@
       } else {
         initializeHeroImages();
         setInterval(rotateHeroContent, 4000);
+      }
+
+      // Mobile menu toggle
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const mainNav = document.getElementById('mainNav');
+      
+      if (mobileMenuToggle && mainNav) {
+        mobileMenuToggle.addEventListener('click', () => {
+          const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+          mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+          mainNav.classList.toggle('nav-open');
+          mobileMenuToggle.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!mainNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            mainNav.classList.remove('nav-open');
+            mobileMenuToggle.classList.remove('active');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = mainNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mainNav.classList.remove('nav-open');
+            mobileMenuToggle.classList.remove('active');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
       }
     </script>
   </body>
