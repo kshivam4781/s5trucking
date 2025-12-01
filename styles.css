@@ -40,8 +40,9 @@ main {
   position: sticky;
   top: 0;
   z-index: 10;
-  padding-bottom: 1rem;
+  padding-bottom: 0;
   border-bottom: 4px solid var(--yellow);
+  width: 100%;
 }
 
 .top-bar {
@@ -50,6 +51,8 @@ main {
   align-items: center;
   padding: 0.8rem 2vw;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  flex-wrap: nowrap;
+  gap: 1rem;
 }
 
 .logo {
@@ -171,6 +174,17 @@ main {
 
 .header-contact {
   text-align: right;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.header-availability {
+  margin: 0 0 0.25rem 0 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--red) !important;
+  font-weight: 700 !important;
 }
 
 .header-contact p {
@@ -198,7 +212,7 @@ main {
   position: relative;
   min-height: 600px;
   height: 600px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero-text {
@@ -259,7 +273,7 @@ main {
   transition: opacity 0.6s ease-in-out;
   justify-content: center;
   position: absolute;
-  bottom: -30px;
+  bottom: -30px !important;
   right: calc(2vw - 50px);
   width: 750px;
   height: 550px;
@@ -325,13 +339,33 @@ main {
 .hero-visual {
   display: flex;
   gap: 0;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   flex-wrap: wrap;
-  position: static;
+  position: relative;
   padding: 0;
   margin: 0;
   overflow: visible;
+  align-self: flex-end;
+}
+
+/* Services/Repairs page hero visual - ensure proper sizing */
+.hero-visual:not(:has(.hero-truck)):not(:has(.hero-owner)):not(:has(.hero-state-images)) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Index.html specific hero visual positioning */
+.hero-visual:has(.hero-truck),
+.hero-visual:has(.hero-owner),
+.hero-visual:has(.hero-state-images) {
+  position: relative;
+  overflow: visible;
+  align-items: flex-end;
+  align-self: flex-end;
+  justify-content: flex-end;
 }
 
 .hero-visual img {
@@ -339,6 +373,13 @@ main {
   object-fit: contain;
   box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
   margin: 0;
+}
+
+/* Only apply full-width responsive styles to hero images that are NOT the special index.html hero images */
+.hero-visual img:not(.hero-truck):not(.hero-owner):not(.hero-state-images img) {
+  width: 600px;
+  height: 500px;
+  object-fit: contain;
 }
 
 .hero-mechanic {
@@ -361,8 +402,8 @@ main {
   height: 550px;
   margin: 0 !important;
   padding: 0 !important;
-  position: absolute;
-  bottom: -70px;
+  position: absolute !important;
+  bottom: -70px !important;
   right: calc(2vw - 50px);
   box-shadow: none !important;
   background: none !important;
@@ -370,10 +411,12 @@ main {
   outline: none !important;
   transition: opacity 0.6s ease-in-out;
   object-fit: contain;
+  z-index: 1;
 }
 
 .hero-truck[src*="truck-icon.png"] {
   right: calc(2vw + 50px);
+  bottom: -70px !important;
 }
 
 .hero-owner {
@@ -450,6 +493,12 @@ section:nth-of-type(even) {
 
 .services {
   position: relative;
+  padding: 2rem 2vw;
+}
+
+.services .container {
+  position: relative;
+  z-index: 1;
 }
 
 .services::before {
@@ -505,6 +554,20 @@ section:nth-of-type(even) {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
+}
+
+.service-card-image {
+  padding: 0 !important;
+  overflow: hidden;
+  min-height: 240px;
+}
+
+.service-card-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  object-fit: cover;
+  display: block;
 }
 
 /* Service Categories for Repairs Page */
@@ -1508,16 +1571,77 @@ section:nth-of-type(even) {
   transform: rotate(-45deg) translate(7px, -7px);
 }
 
+/* Desktop - ensure hero images maintain bottom positioning */
+@media (min-width: 969px) {
+  .hero {
+    overflow: visible !important;
+    padding-bottom: 100px !important;
+    align-items: flex-end !important;
+  }
+
+  .hero-visual {
+    position: relative !important;
+    overflow: visible !important;
+    align-items: flex-end !important;
+    align-self: flex-end !important;
+    justify-content: flex-end !important;
+    height: 100%;
+    display: flex !important;
+  }
+
+  .hero-visual:has(.hero-truck),
+  .hero-visual:has(.hero-state-images) {
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+  }
+
+  .hero-truck {
+    position: absolute !important;
+    bottom: -70px !important;
+    top: auto !important;
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero-truck[src*="truck-icon.png"] {
+    bottom: -70px !important;
+    top: auto !important;
+  }
+
+  .hero-truck[src*="truck2.png"] {
+    bottom: -70px !important;
+    top: auto !important;
+  }
+
+  .hero-state-images {
+    position: absolute !important;
+    bottom: -30px !important;
+    top: auto !important;
+    align-items: flex-end !important;
+  }
+
+  .hero-owner {
+    position: relative !important;
+  }
+}
+
 /* Tablet and below */
 @media (max-width: 968px) {
   .mobile-menu-toggle {
     display: flex;
+    order: 2;
+    margin-left: auto;
   }
 
   .top-bar {
     flex-wrap: wrap;
     gap: 1rem;
     position: relative;
+  }
+
+  .logo {
+    flex: 1;
+    min-width: 0;
   }
 
   .main-nav {
@@ -1528,13 +1652,16 @@ section:nth-of-type(even) {
     background: var(--black);
     flex-direction: column;
     align-items: flex-start;
-    padding: 1rem 2vw;
+    padding: 0;
     gap: 0;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease, padding 0.3s ease;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     z-index: 1000;
+    order: 3;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
 
   .main-nav.nav-open {
@@ -1585,13 +1712,28 @@ section:nth-of-type(even) {
   }
 
   .header-contact {
-    text-align: left;
+    text-align: center;
     width: 100%;
-    order: 2;
+    order: 4;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .header-availability {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .header-contact p {
+    font-size: 0.7rem;
+    margin-bottom: 0.25rem;
   }
 
   .phone-link {
-    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    word-break: break-all;
   }
 
   .hero {
@@ -1607,11 +1749,21 @@ section:nth-of-type(even) {
     text-align: center;
   }
 
-  .hero-visual {
+  /* Only apply responsive layout to hero-visual that doesn't contain index.html specific elements */
+  .hero-visual:not(:has(.hero-truck)):not(:has(.hero-owner)):not(:has(.hero-state-images)) {
     order: 1;
     margin-bottom: 2rem;
+    width: 100%;
   }
 
+  /* Fixed size for hero visual image on tablet (only for services/repairs pages) */
+  .hero-visual img:not(.hero-truck):not(.hero-owner):not(.hero-state-images img) {
+    width: 500px;
+    height: 400px;
+    object-fit: contain;
+  }
+
+  /* Index.html hero images - keep their specific responsive behavior */
   .hero-truck {
     position: relative;
     width: 100%;
@@ -1662,9 +1814,25 @@ section:nth-of-type(even) {
     padding: 1.5rem;
   }
 
+  .service-category {
+    margin-bottom: 2.5rem;
+  }
+
+  .category-title {
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+  }
+
   .service-card {
     min-height: 200px;
     padding: 1.5rem;
+  }
+
+  .service-card-image {
+    min-height: 200px;
+  }
+
+  .service-card-image img {
+    min-height: 200px;
   }
 
   .manufacturers-grid {
@@ -1755,11 +1923,13 @@ section:nth-of-type(even) {
 @media (max-width: 700px) {
   .top-bar {
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.75rem;
+    padding: 0.75rem 2vw;
   }
 
   .logo {
     flex: 1;
+    min-width: 0;
   }
 
   .logo img {
@@ -1771,8 +1941,20 @@ section:nth-of-type(even) {
     font-size: 1rem;
   }
 
+  .logo-text small {
+    font-size: 0.7rem;
+  }
+
+  .mobile-menu-toggle {
+    order: 2;
+    margin-left: auto;
+    width: 28px;
+    height: 28px;
+  }
+
   .main-nav {
     width: 100%;
+    order: 4;
   }
 
   .main-nav a {
@@ -1782,14 +1964,26 @@ section:nth-of-type(even) {
   .header-contact {
     width: 100%;
     text-align: center;
+    order: 4;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .header-availability {
+    font-size: 0.6rem !important;
+    margin-bottom: 0.15rem !important;
   }
 
   .header-contact p {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
+    margin-bottom: 0.25rem;
   }
 
   .phone-link {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    word-break: break-all;
   }
 
   .hero {
@@ -1822,34 +2016,53 @@ section:nth-of-type(even) {
     margin-bottom: 1.5rem !important;
   }
 
+  /* Index.html hero images - mobile specific styles with important to override general styles */
   .hero-truck {
-    max-width: 100%;
-    max-height: 300px;
-    width: auto;
-    height: auto;
+    max-width: 100% !important;
+    max-height: 300px !important;
+    width: auto !important;
+    height: auto !important;
+    position: relative !important;
+    bottom: auto !important;
+    right: auto !important;
   }
 
   .hero-owner {
-    max-width: 100%;
-    max-height: 300px;
-    width: auto;
-    height: auto;
+    max-width: 100% !important;
+    max-height: 300px !important;
+    width: auto !important;
+    height: auto !important;
+    position: relative !important;
   }
 
   .hero-state-images {
-    max-width: 100%;
-    width: 100%;
-    height: auto;
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
     gap: 0.5rem;
     flex-wrap: wrap;
     justify-content: center;
+    position: relative !important;
+    bottom: auto !important;
+    right: auto !important;
   }
 
   .hero-state-images img {
-    max-width: 140px;
-    max-height: 250px;
-    width: auto;
-    height: auto;
+    max-width: 140px !important;
+    max-height: 250px !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  /* Ensure index.html hero-visual container maintains proper layout */
+  .hero-visual:has(.hero-truck),
+  .hero-visual:has(.hero-owner),
+  .hero-visual:has(.hero-state-images) {
+    order: 1;
+    margin-bottom: 2rem;
+    width: 100%;
+    position: relative;
+    overflow: visible;
   }
 
   .hero-actions {
@@ -1877,9 +2090,43 @@ section:nth-of-type(even) {
     gap: 1rem;
   }
 
+  .service-category {
+    margin-bottom: 2rem;
+  }
+
+  .category-title {
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .services {
+    padding: 1.5rem 2vw;
+  }
+
+  .services .section-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .services .section-title h2 {
+    font-size: clamp(1.75rem, 5vw, 2rem);
+  }
+
+  .services .section-title p {
+    font-size: 0.95rem;
+  }
+
   .service-card {
     min-height: auto;
     padding: 1.5rem;
+  }
+
+  .service-card-image {
+    min-height: 180px;
+  }
+
+  .service-card-image img {
+    min-height: 180px;
   }
 
   .service-card h3 {
@@ -2160,6 +2407,86 @@ section:nth-of-type(even) {
   }
 }
 
+/* Repairs page specific responsive improvements */
+@media (max-width: 968px) {
+  /* Enhanced spacing for service categories on tablet */
+  .service-category {
+    margin-bottom: 2.5rem;
+  }
+
+  /* Ensure service grid has proper padding on tablet */
+  .services .service-grid {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  /* Refined service card spacing for mobile */
+  .services .service-grid {
+    gap: 0.875rem;
+  }
+
+  .service-card {
+    padding: 1.25rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* Fixed size for hero visual image on mobile (only for services/repairs pages) */
+  .hero-visual img:not(.hero-truck):not(.hero-owner):not(.hero-state-images img) {
+    width: 100%;
+    max-width: 400px;
+    height: 350px;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Enhanced mobile spacing for repairs page */
+  .service-category {
+    margin-bottom: 1.75rem;
+  }
+
+  .category-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .services .service-grid {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .service-card {
+    padding: 1rem;
+  }
+
+  .service-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .service-card p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .service-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem;
+  }
+}
+
 /* Manufacturer/Trucks Page Styles */
 .manufacturer-hero {
   background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
@@ -2411,9 +2738,29 @@ section:nth-of-type(even) {
 }
 
 /* Responsive styles for manufacturer sections */
-@media (max-width: 768px) {
+@media (max-width: 968px) {
   .manufacturer-hero {
     padding: 3rem 2vw;
+    margin-bottom: 2rem;
+  }
+
+  .manufacturer-hero .section-title h1 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+  }
+
+  .manufacturer-hero .section-title p {
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  }
+
+  .manufacturer-nav {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    gap: 0.75rem;
+  }
+
+  .manufacturer-nav a {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
   }
 
   .manufacturer-section {
@@ -2435,15 +2782,46 @@ section:nth-of-type(even) {
     margin: 0 auto;
   }
 
+  .manufacturer-header h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+
+  .manufacturer-subtitle {
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  }
+
   .expertise-grid,
   .scenarios-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
 
   .expertise-card,
   .scenario-card {
     padding: 2rem;
+  }
+
+  .expertise-section h3,
+  .scenarios-section h3 {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+  }
+
+  .manufacturer-cta {
+    padding: 3rem 2vw;
+  }
+
+  .cta-content h2 {
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
+  }
+
+  .cta-content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .manufacturer-hero {
+    padding: 2.5rem 2vw;
   }
 
   .manufacturer-nav {
@@ -2455,11 +2833,250 @@ section:nth-of-type(even) {
   .manufacturer-nav a {
     text-align: center;
     padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .manufacturer-section {
+    padding: 2.5rem 2vw;
+    margin-bottom: 2rem;
+  }
+
+  .expertise-grid,
+  .scenarios-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .expertise-card,
+  .scenario-card {
+    padding: 1.75rem;
   }
 
   .expertise-section,
   .scenarios-section {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* Additional responsive styles for trucks.html at 700px breakpoint */
+@media (max-width: 700px) {
+  .manufacturer-hero {
+    padding: 2rem 2vw;
+  }
+
+  .manufacturer-hero .section-title h1 {
+    font-size: clamp(1.6rem, 5vw, 2rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .manufacturer-hero .section-title p {
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+  }
+
+  .manufacturer-nav {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    gap: 0.6rem;
+  }
+
+  .manufacturer-nav a {
+    padding: 0.85rem 1.25rem;
+    font-size: 0.85rem;
+  }
+
+  .manufacturer-section {
+    padding: 2rem 2vw;
+    margin-bottom: 1.5rem;
+  }
+
+  .manufacturer-header {
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .manufacturer-brand-logo {
+    width: 160px;
+    height: 90px;
+  }
+
+  .manufacturer-header h2 {
+    font-size: clamp(1.4rem, 4vw, 1.9rem);
+  }
+
+  .manufacturer-subtitle {
+    font-size: clamp(0.9rem, 1.1vw, 1rem);
+  }
+
+  .expertise-section {
+    margin-bottom: 2rem;
+  }
+
+  .expertise-section h3 {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .expertise-grid {
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .expertise-card {
+    padding: 1.5rem;
+  }
+
+  .expertise-card i {
+    font-size: 2.5rem;
+  }
+
+  .expertise-card h4 {
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  }
+
+  .expertise-card p {
+    font-size: clamp(0.9rem, 1vw, 0.95rem);
+  }
+
+  .scenarios-section {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+  }
+
+  .scenarios-section h3 {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .scenarios-grid {
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .scenario-card {
+    padding: 1.5rem;
+  }
+
+  .scenario-card h4 {
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  }
+
+  .scenario-card p {
+    font-size: clamp(0.9rem, 1vw, 0.95rem);
+  }
+
+  .manufacturer-cta {
+    padding: 2.5rem 2vw;
+    margin-top: 2rem;
+  }
+
+  .cta-content h2 {
+    font-size: clamp(1.6rem, 4vw, 2rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-content p {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cta-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Extra small screens for trucks.html */
+@media (max-width: 480px) {
+  .manufacturer-hero {
+    padding: 1.5rem 2vw;
+  }
+
+  .manufacturer-hero .section-title h1 {
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+  }
+
+  .manufacturer-hero .section-title p {
+    font-size: 0.9rem;
+  }
+
+  .manufacturer-nav {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    gap: 0.5rem;
+  }
+
+  .manufacturer-nav a {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .manufacturer-section {
+    padding: 1.5rem 2vw;
+  }
+
+  .manufacturer-header {
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .manufacturer-brand-logo {
+    width: 140px;
+    height: 80px;
+    padding: 1rem;
+  }
+
+  .manufacturer-header h2 {
+    font-size: clamp(1.2rem, 5vw, 1.6rem);
+  }
+
+  .manufacturer-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .expertise-section h3,
+  .scenarios-section h3 {
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    margin-bottom: 1.25rem;
+  }
+
+  .expertise-card,
+  .scenario-card {
+    padding: 1.25rem;
+  }
+
+  .expertise-card i {
+    font-size: 2rem;
+  }
+
+  .expertise-card h4,
+  .scenario-card h4 {
+    font-size: clamp(1rem, 1.3vw, 1.2rem);
+  }
+
+  .expertise-card p,
+  .scenario-card p {
+    font-size: 0.9rem;
+  }
+
+  .manufacturer-cta {
+    padding: 2rem 2vw;
+  }
+
+  .cta-content h2 {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+  }
+
+  .cta-content p {
+    font-size: 0.9rem;
   }
 }
 
@@ -2579,17 +3196,39 @@ section:nth-of-type(even) {
 
 /* Small mobile */
 @media (max-width: 480px) {
+  .top-bar {
+    padding: 0.6rem 2vw;
+  }
+
   .logo img {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
   }
 
   .logo-text span {
-    font-size: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .logo-text small {
+    font-size: 0.65rem;
+  }
+
+  .mobile-menu-toggle {
+    width: 26px;
+    height: 26px;
+  }
+
+  .header-availability {
+    font-size: 0.55rem !important;
+    margin-bottom: 0.1rem !important;
+  }
+
+  .header-contact p {
+    font-size: 0.6rem;
   }
 
   .phone-link {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 
   .hero-text h1 {
@@ -2637,6 +3276,502 @@ section:nth-of-type(even) {
 
   .service-card p {
     font-size: 0.9rem;
+  }
+}
+
+/* About page specific responsive styles */
+@media (max-width: 968px) {
+  /* About page hero responsive */
+  .about-page .hero {
+    grid-template-columns: 1fr;
+    padding: 2rem 2vw 3rem;
+    min-height: auto;
+    height: auto;
+    padding-bottom: 4rem;
+  }
+
+  .about-page .hero-text {
+    order: 2;
+    text-align: center;
+  }
+
+  .about-page .hero-visual {
+    order: 1;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
+  .about-page .hero-visual .hero-owner {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  .about-page .hero-text h1 {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+  }
+
+  .about-page .hero-actions {
+    justify-content: center;
+  }
+
+  /* About page benefits grid responsive */
+  .about-page .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* About page contact layout responsive */
+  .about-page .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-page .contact-image {
+    order: -1;
+  }
+
+  .about-page .contact-image img {
+    max-width: 100%;
+    max-height: 400px;
+  }
+
+  /* About page intro sections responsive */
+  .about-page .intro {
+    padding: 2rem 2vw;
+  }
+
+  .about-page .intro h2 {
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    text-align: center;
+  }
+
+  .about-page .intro p {
+    font-size: 1rem;
+    text-align: left;
+  }
+}
+
+@media (max-width: 700px) {
+  /* About page hero mobile */
+  .about-page .hero {
+    padding: 1.5rem 2vw 2.5rem;
+  }
+
+  .about-page .hero-text h1 {
+    font-size: clamp(1.75rem, 6vw, 2.2rem);
+    line-height: 1.2;
+  }
+
+  .about-page .hero-text .eyebrow {
+    font-size: 0.75rem !important;
+    letter-spacing: 0.2em !important;
+  }
+
+  .about-page .hero-text h1 span {
+    font-size: 0.9rem !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .about-page .hero-description {
+    font-size: 0.95rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .about-page .hero-visual .hero-owner {
+    max-width: 100% !important;
+    max-height: 300px !important;
+  }
+
+  .about-page .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .about-page .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* About page benefits grid mobile */
+  .about-page .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .about-page .benefit-card {
+    min-height: auto;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .about-page .benefit-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .about-page .benefit-card p {
+    font-size: 0.95rem;
+  }
+
+  /* About page contact mobile */
+  .about-page .contact {
+    padding: 2.5rem 2vw !important;
+  }
+
+  .about-page .contact-layout {
+    gap: 1.5rem;
+  }
+
+  .about-page .contact-image img {
+    max-height: 300px;
+  }
+
+  .about-page .contact-details {
+    text-align: center;
+  }
+
+  .about-page .contact-details h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-page .contact-details p {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .about-page .contact .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .about-page .contact .hero-actions .btn {
+    width: 100%;
+  }
+
+  /* About page intro mobile */
+  .about-page .intro {
+    padding: 1.5rem 2vw;
+  }
+
+  .about-page .intro h2 {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+    margin-bottom: 1rem;
+  }
+
+  .about-page .intro p {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-page .section-title h2 {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+  }
+
+  .about-page .section-title p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* About page extra small screens */
+  .about-page .hero {
+    padding: 1rem 2vw 2rem;
+  }
+
+  .about-page .hero-text h1 {
+    font-size: clamp(1.5rem, 7vw, 1.9rem);
+  }
+
+  .about-page .benefit-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .about-page .benefit-card h3 {
+    font-size: 1rem;
+  }
+
+  .about-page .benefit-card p {
+    font-size: 0.9rem;
+  }
+
+  .about-page .contact {
+    padding: 2rem 2vw !important;
+  }
+
+  .about-page .contact-details p {
+    font-size: 0.9rem;
+  }
+
+  .about-page .intro {
+    padding: 1.25rem 2vw;
+  }
+
+  .about-page .intro p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Contact page specific responsive styles */
+@media (max-width: 968px) {
+  /* Contact page hero responsive */
+  .contact-page .hero {
+    grid-template-columns: 1fr;
+    padding: 2rem 2vw 3rem;
+    min-height: auto;
+    height: auto;
+    padding-bottom: 4rem;
+  }
+
+  .contact-page .hero-text {
+    order: 2;
+    text-align: center;
+  }
+
+  .contact-page .hero-visual {
+    order: 1;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
+  .contact-page .hero-visual img {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  .contact-page .hero-text h1 {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+  }
+
+  .contact-page .hero-actions {
+    justify-content: center;
+  }
+
+  /* Contact page contact form layout responsive */
+  .contact-page .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-page .contact-image {
+    order: -1;
+  }
+
+  .contact-page .contact-image img {
+    max-width: 100%;
+    max-height: 400px;
+  }
+
+  .contact-page .dynamic-text-container {
+    width: 95%;
+    max-width: 100%;
+  }
+
+  .contact-page .dynamic-text {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    padding: 1rem 1.5rem;
+  }
+
+  /* Contact page benefits grid responsive */
+  .contact-page .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* Contact page section titles responsive */
+  .contact-page .section-title h2 {
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    text-align: center;
+  }
+
+  .contact-page .section-title p {
+    font-size: 1rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 700px) {
+  /* Contact page hero mobile */
+  .contact-page .hero {
+    padding: 1.5rem 2vw 2.5rem;
+  }
+
+  .contact-page .hero-text h1 {
+    font-size: clamp(1.75rem, 6vw, 2.2rem);
+    line-height: 1.2;
+  }
+
+  .contact-page .hero-text .eyebrow {
+    font-size: 0.75rem !important;
+    letter-spacing: 0.2em !important;
+  }
+
+  .contact-page .hero-text h1 span {
+    font-size: 0.9rem !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .contact-page .hero-description {
+    font-size: 0.95rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .contact-page .hero-visual img {
+    max-width: 100% !important;
+    max-height: 300px !important;
+  }
+
+  .contact-page .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .contact-page .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Contact page contact form mobile */
+  .contact-page .contact {
+    padding: 2.5rem 2vw !important;
+  }
+
+  .contact-page .contact-layout {
+    gap: 1.5rem;
+  }
+
+  .contact-page .contact-image img {
+    max-height: 300px;
+  }
+
+  .contact-page .contact-image {
+    margin-bottom: 1rem;
+  }
+
+  .contact-page .dynamic-text-container {
+    bottom: 1rem;
+    width: 90%;
+  }
+
+  .contact-page .dynamic-text {
+    font-size: 0.95rem;
+    padding: 0.9rem 1.2rem;
+  }
+
+  .contact-page .contact-form {
+    width: 100%;
+  }
+
+  .contact-page .contact-form label {
+    font-size: 0.95rem;
+  }
+
+  .contact-page .contact-form input,
+  .contact-page .contact-form select,
+  .contact-page .contact-form textarea {
+    font-size: 0.95rem;
+    padding: 0.8rem 0.9rem;
+  }
+
+  .contact-page .contact-form button {
+    width: 100%;
+    align-self: stretch;
+    margin-top: 0.75rem;
+  }
+
+  /* Contact page benefits grid mobile */
+  .contact-page .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .contact-page .benefit-card {
+    min-height: auto;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .contact-page .benefit-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .contact-page .benefit-card h3 i {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+
+  .contact-page .benefit-card p {
+    font-size: 0.95rem;
+  }
+
+  .contact-page .benefit-card a {
+    font-size: 0.95rem;
+    word-break: break-word;
+  }
+
+  /* Contact page section titles mobile */
+  .contact-page .section-title h2 {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-page .section-title p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Contact page extra small screens */
+  .contact-page .hero {
+    padding: 1rem 2vw 2rem;
+  }
+
+  .contact-page .hero-text h1 {
+    font-size: clamp(1.5rem, 7vw, 1.9rem);
+  }
+
+  .contact-page .contact {
+    padding: 2rem 2vw !important;
+  }
+
+  .contact-page .contact-image img {
+    max-height: 250px;
+  }
+
+  .contact-page .dynamic-text {
+    font-size: 0.85rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .contact-page .contact-form input,
+  .contact-page .contact-form select,
+  .contact-page .contact-form textarea {
+    font-size: 0.9rem;
+    padding: 0.75rem 0.8rem;
+  }
+
+  .contact-page .benefit-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .contact-page .benefit-card h3 {
+    font-size: 1rem;
+  }
+
+  .contact-page .benefit-card p {
+    font-size: 0.9rem;
+  }
+
+  .contact-page .section-title h2 {
+    font-size: clamp(1.3rem, 6vw, 1.6rem);
+  }
+
+  .contact-page .section-title p {
+    font-size: 0.85rem;
   }
 }
 

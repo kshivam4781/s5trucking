@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="contact-page">
     <header class="page-header" aria-label="Main navigation">
       <div class="top-bar">
         <div class="logo">
@@ -30,7 +30,12 @@
             <small>Flemington, NJ</small>
           </div>
         </div>
-        <nav class="main-nav">
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="main-nav" id="mainNav">
           <a href="index.html">Home</a>
           <div class="nav-dropdown">
             <a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
@@ -86,6 +91,7 @@
           <a href="contact-us.html">Contact Us</a>
         </nav>
         <div class="header-contact">
+          <p class="header-availability">24/7 Emergency Service</p>
           <p>Serving New Jersey &amp; New York</p>
           <a class="phone-link" href="tel:+19085551234" aria-label="Call now">
             (908) 555-1234
@@ -306,6 +312,38 @@
     </div>
 
     <script>
+      // Mobile menu toggle
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const mainNav = document.getElementById('mainNav');
+      
+      if (mobileMenuToggle && mainNav) {
+        mobileMenuToggle.addEventListener('click', () => {
+          const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+          mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+          mainNav.classList.toggle('nav-open');
+          mobileMenuToggle.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!mainNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            mainNav.classList.remove('nav-open');
+            mobileMenuToggle.classList.remove('active');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = mainNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mainNav.classList.remove('nav-open');
+            mobileMenuToggle.classList.remove('active');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
       // Dynamic text rotation for Contact & Dispatch Form
       const dynamicTexts = [
         "Did your truck break down?",
