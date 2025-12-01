@@ -128,6 +128,9 @@ main {
   background: var(--black);
   color: var(--white);
   position: relative;
+  min-height: 600px;
+  height: 600px;
+  overflow: hidden;
 }
 
 .hero-text {
@@ -259,8 +262,8 @@ main {
 }
 
 .hero-truck {
-  width: 650px;
-  height: 500px;
+  width: 750px;
+  height: 550px;
   margin: 0 !important;
   padding: 0 !important;
   position: absolute;
@@ -270,6 +273,7 @@ main {
   background: none !important;
   border: none !important;
   outline: none !important;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .section-title h2,
@@ -679,7 +683,7 @@ section:nth-of-type(even) {
 }
 
 .reviews .section-title h2 {
-  color: var(--yellow);
+  color: var(--black);
   text-align: center;
   margin-bottom: 0.5rem;
 }
@@ -1181,6 +1185,8 @@ section:nth-of-type(even) {
   .hero {
     grid-template-columns: 1fr;
     padding: 2rem 2vw 3rem;
+    min-height: 550px;
+    height: 550px;
   }
 
   .hero-visual {
@@ -1246,6 +1252,8 @@ section:nth-of-type(even) {
 
   .hero {
     padding: 1.5rem 2vw 2rem;
+    min-height: 500px;
+    height: 500px;
   }
 
   .hero-visual img {

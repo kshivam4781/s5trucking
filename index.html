@@ -71,6 +71,7 @@
         </div>
         <div class="hero-visual">
           <img
+            id="heroTruck"
             class="hero-truck"
             src="assets/truck2.png"
             alt="Truck repair service"
@@ -542,28 +543,32 @@
           titleMain: "24/7 Truck & Trailer Repair Serving New Jersey & New York",
           titleSub: "Roadside Assistance • Mobile Service • DOT Inspections",
           description: "Local diesel mechanics bring service to the highway, shop, or parking lot so owner-operators and fleets can keep moving.",
-          badges: ["Top Rated on Google", "ASE Certified", "24/7 Roadside Service", "Serving New Jersey & New York"]
+          badges: ["Top Rated on Google", "ASE Certified", "24/7 Roadside Service", "Serving New Jersey & New York"],
+          truckImage: "assets/truck2.png"
         },
         {
           eyebrow: "Emergency Mobile Diesel Service",
           titleMain: "Fast Response When You Need It Most",
           titleSub: "On-Site Repairs • Same-Day Service • Fleet Support",
           description: "Our certified mechanics come to you—whether you're broken down on the highway, at your yard, or in a parking lot. Get back on the road fast.",
-          badges: ["Average 45-Min Response", "ASE Certified", "24/7 Emergency", "All Makes & Models"]
+          badges: ["Average 45-Min Response", "ASE Certified", "24/7 Emergency", "All Makes & Models"],
+          truckImage: "assets/truck-icon.png"
         },
         {
           eyebrow: "Professional Truck & Trailer Repair",
           titleMain: "Trusted by Fleets & Owner-Operators",
           titleSub: "DOT Inspections • Brake Repair • Engine Diagnostics",
           description: "From routine maintenance to emergency repairs, we handle everything from brakes and suspension to engine diagnostics and electrical systems.",
-          badges: ["Fleet Accounts Welcome", "DOT Certified", "Same-Day Service", "Honest Pricing"]
+          badges: ["Fleet Accounts Welcome", "DOT Certified", "Same-Day Service", "Honest Pricing"],
+          truckImage: "assets/truck2.png"
         },
         {
           eyebrow: "Hunterdon County's Premier Truck Service",
           titleMain: "Serving New Jersey & New York 24/7",
           titleSub: "Mobile Service • Shop Repairs • Roadside Assistance",
           description: "Located in Flemington, NJ, we provide comprehensive truck and trailer repair services across the entire Northeast region.",
-          badges: ["Local & Reliable", "24/7 Dispatch", "Experienced Team", "Transparent Pricing"]
+          badges: ["Local & Reliable", "24/7 Dispatch", "Experienced Team", "Transparent Pricing"],
+          truckImage: "assets/truck-icon.png"
         }
       ];
 
@@ -574,11 +579,15 @@
       const heroDescription = document.getElementById('heroDescription');
       const heroBadges = document.getElementById('heroBadges');
       const heroText = document.querySelector('.hero-text');
+      const heroTruck = document.getElementById('heroTruck');
 
       function rotateHeroContent() {
         if (heroText && heroEyebrow && heroTitleMain && heroTitleSub && heroDescription && heroBadges) {
           // Fade out
           heroText.style.opacity = '0';
+          if (heroTruck) {
+            heroTruck.style.opacity = '0';
+          }
           
           setTimeout(() => {
             heroIndex = (heroIndex + 1) % heroContents.length;
@@ -592,8 +601,16 @@
             // Update badges
             heroBadges.innerHTML = content.badges.map(badge => `<span>${badge}</span>`).join('');
             
+            // Update truck image
+            if (heroTruck && content.truckImage) {
+              heroTruck.src = content.truckImage;
+            }
+            
             // Fade in
             heroText.style.opacity = '1';
+            if (heroTruck) {
+              heroTruck.style.opacity = '1';
+            }
           }, 300);
         }
       }
