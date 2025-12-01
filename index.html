@@ -32,8 +32,56 @@
         </div>
         <nav class="main-nav">
           <a href="index.html">Home</a>
-          <a href="services.html">Services</a>
-          <a href="repairs.html">Repairs</a>
+          <div class="nav-dropdown">
+            <a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a href="services.html#clean-truck-check">Clean Truck Check</a>
+              <a href="services.html#preventive-maintenance">Preventive Maintenance</a>
+              <a href="services.html#roadside-assistance">Roadside Assistance</a>
+              <a href="services.html#trailer-repair">Trailer Repair</a>
+              <a href="services.html#general-diesel-repair">General Diesel Repair</a>
+              <a href="services.html#bus-repair">Bus Repair</a>
+              <a href="services.html#rv-repair">RV Repair</a>
+              <a href="services.html#bit-inspections">BIT Inspections</a>
+              <a href="services.html#dot-inspection">DOT Inspection</a>
+              <a href="services.html#mobile-truck-repair">Mobile Truck Repair</a>
+              <a href="services.html#truck-towing">Truck Towing</a>
+              <a href="services.html#truck-parts">Truck Parts</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <a href="repairs.html">Repairs <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a href="repairs.html#tire-repair">Tire Repair</a>
+              <a href="repairs.html#suspension-repair">Suspension Repair</a>
+              <a href="repairs.html#diagnostics-electrical">Diagnostics & Electrical Repair</a>
+              <a href="repairs.html#transmission-clutch">Transmission & Clutch Repair</a>
+              <a href="repairs.html#brake-repair">Brake Repair</a>
+              <a href="repairs.html#exhaust-system">Exhaust System Repair</a>
+              <a href="repairs.html#engine-repair">Engine Repair, Rebuild & Conversion</a>
+              <a href="repairs.html#oil-fluid">Oil & Fluid</a>
+              <a href="repairs.html#hvac-systems">HVAC Systems Repair</a>
+              <a href="repairs.html#egr-dpf">EGR & DPF Repair</a>
+              <a href="repairs.html#axle-repair">Axle Repair</a>
+              <a href="repairs.html#driveline-repair">Driveline Repair</a>
+              <a href="repairs.html#express-lube">Express Lube</a>
+              <a href="repairs.html#coolant-system">Coolant System Repair</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <a href="trucks.html">Trucks <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a href="trucks.html#freightliner">Freightliner</a>
+              <a href="trucks.html#hino">Hino</a>
+              <a href="trucks.html#international">International</a>
+              <a href="trucks.html#isuzu">Isuzu</a>
+              <a href="trucks.html#kenworth">Kenworth</a>
+              <a href="trucks.html#mack">Mack</a>
+              <a href="trucks.html#peterbilt">Peterbilt</a>
+              <a href="trucks.html#volvo">Volvo</a>
+              <a href="trucks.html#western-star">Western Star</a>
+            </div>
+          </div>
           <a href="about-us.html">About Us</a>
           <a href="contact-us.html">Contact Us</a>
         </nav>
@@ -76,6 +124,10 @@
             src="assets/truck2.png"
             alt="Truck repair service"
           />
+          <div class="hero-state-images" id="heroStateImages" style="display: none;">
+            <img src="assets/newjersey.png" alt="New Jersey" />
+            <img src="assets/newyork.png" alt="New York" />
+          </div>
         </div>
       </section>
 
@@ -154,6 +206,42 @@
               <h3>Welding &amp; Fabrication</h3>
               <p>Frame straightening, trailer frame welding, and custom fabrication.</p>
             </article>
+          </div>
+      </section>
+
+      <section class="manufacturers container" aria-labelledby="manufacturers-title">
+          <div class="section-title">
+            <h2 id="manufacturers-title">Manufacturers We Specialize In</h2>
+            <p>Expert service for all major truck brands and models.</p>
+          </div>
+          <div class="manufacturers-grid">
+            <div class="manufacturer-logo">
+              <img src="assets/images/manufacturers/freightlines.svg" alt="Freightliner" />
+            </div>
+            <div class="manufacturer-logo">
+              <img src="assets/images/manufacturers/hino.svg" alt="Hino" />
+            </div>
+            <div class="manufacturer-logo">
+              <img src="assets/images/manufacturers/international.svg" alt="International" />
+            </div>
+            <div class="manufacturer-logo">
+              <img src="assets/images/manufacturers/isuzu.svg" alt="Isuzu" />
+            </div>
+            <div class="manufacturer-logo">
+              <img src="assets/images/manufacturers/kenworth.svg" alt="Kenworth" />
+            </div>
+            <div class="manufacturer-logo">
+              <img src="assets/images/manufacturers/mack.svg" alt="Mack" />
+            </div>
+            <div class="manufacturer-logo">
+              <img src="assets/images/manufacturers/peterbilt.svg" alt="Peterbilt" />
+            </div>
+            <div class="manufacturer-logo">
+              <img src="assets/images/manufacturers/volvo.svg" alt="Volvo" />
+            </div>
+            <div class="manufacturer-logo">
+              <img src="assets/images/manufacturers/western_star.svg" alt="Western Star" />
+            </div>
           </div>
       </section>
 
@@ -580,6 +668,7 @@
       const heroBadges = document.getElementById('heroBadges');
       const heroText = document.querySelector('.hero-text');
       const heroTruck = document.getElementById('heroTruck');
+      const heroStateImages = document.getElementById('heroStateImages');
 
       function rotateHeroContent() {
         if (heroText && heroEyebrow && heroTitleMain && heroTitleSub && heroDescription && heroBadges) {
@@ -587,6 +676,9 @@
           heroText.style.opacity = '0';
           if (heroTruck) {
             heroTruck.style.opacity = '0';
+          }
+          if (heroStateImages) {
+            heroStateImages.style.opacity = '0';
           }
           
           setTimeout(() => {
@@ -601,26 +693,82 @@
             // Update badges
             heroBadges.innerHTML = content.badges.map(badge => `<span>${badge}</span>`).join('');
             
-            // Update truck image
-            if (heroTruck && content.truckImage) {
-              heroTruck.src = content.truckImage;
+            // Check if content mentions New Jersey or New York
+            const showStates = content.titleMain.includes('New Jersey') || content.titleMain.includes('New York') || 
+                              content.eyebrow.includes('New Jersey') || content.eyebrow.includes('New York');
+            
+            // Show/hide state images or truck image based on content
+            if (showStates) {
+              // Show state images, hide truck
+              if (heroStateImages) {
+                heroStateImages.style.display = 'flex';
+                setTimeout(() => {
+                  heroStateImages.style.opacity = '1';
+                }, 50);
+              }
+              if (heroTruck) {
+                heroTruck.style.opacity = '0';
+                heroTruck.style.display = 'none';
+              }
+            } else {
+              // Show truck, hide state images
+              if (heroTruck && content.truckImage) {
+                heroTruck.src = content.truckImage;
+                heroTruck.style.display = 'block';
+                setTimeout(() => {
+                  heroTruck.style.opacity = '1';
+                }, 50);
+              }
+              if (heroStateImages) {
+                heroStateImages.style.opacity = '0';
+                setTimeout(() => {
+                  heroStateImages.style.display = 'none';
+                }, 300);
+              }
             }
             
             // Fade in
             heroText.style.opacity = '1';
-            if (heroTruck) {
-              heroTruck.style.opacity = '1';
-            }
           }, 300);
+        }
+      }
+
+      // Initialize images on page load
+      function initializeHeroImages() {
+        const initialContent = heroContents[0];
+        const showStates = initialContent.titleMain.includes('New Jersey') || initialContent.titleMain.includes('New York') || 
+                          initialContent.eyebrow.includes('New Jersey') || initialContent.eyebrow.includes('New York');
+        
+        if (showStates) {
+          // Show state images, hide truck
+          if (heroStateImages) {
+            heroStateImages.style.display = 'flex';
+            heroStateImages.style.opacity = '1';
+          }
+          if (heroTruck) {
+            heroTruck.style.display = 'none';
+          }
+        } else {
+          // Show truck, hide state images
+          if (heroTruck && initialContent.truckImage) {
+            heroTruck.src = initialContent.truckImage;
+            heroTruck.style.display = 'block';
+            heroTruck.style.opacity = '1';
+          }
+          if (heroStateImages) {
+            heroStateImages.style.display = 'none';
+          }
         }
       }
 
       // Start hero rotation after page load
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
+          initializeHeroImages();
           setInterval(rotateHeroContent, 4000);
         });
       } else {
+        initializeHeroImages();
         setInterval(rotateHeroContent, 4000);
       }
     </script>
