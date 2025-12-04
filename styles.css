@@ -45,6 +45,110 @@ main {
   width: 100%;
 }
 
+.header-top-section {
+  transition: transform 0.3s ease, opacity 0.3s ease, max-height 0.3s ease;
+  transform: translateY(0);
+  opacity: 1;
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.header-top-section.scrolled-down {
+  transform: translateY(-100%);
+  opacity: 0;
+  max-height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.header-contact-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5rem 2vw;
+  background: var(--black);
+  transition: transform 0.3s ease, opacity 0.3s ease, max-height 0.3s ease, padding 0.3s ease;
+  transform: translateY(0);
+  opacity: 1;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.header-contact-section .header-contact {
+  display: block;
+}
+
+.header-contact-compact {
+  display: none;
+  text-align: center;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.header-contact-compact .header-availability {
+  margin: 0 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--red) !important;
+  font-weight: 700 !important;
+}
+
+.header-contact-compact .phone-link {
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--yellow);
+  text-decoration: none;
+}
+
+.header-contact-section.scrolled-down {
+  padding: 0.8rem 2vw;
+  justify-content: center;
+}
+
+.header-contact-section.scrolled-down .header-contact {
+  display: none;
+}
+
+.header-contact-section.scrolled-down .header-contact-compact {
+  display: flex;
+}
+
+/* Desktop and Tablet: Always show both sections, ignore scroll behavior */
+@media (min-width: 701px) {
+  .header-top-section.scrolled-down {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    max-height: 500px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Hide separate contact section on desktop */
+  .header-contact-section {
+    display: none !important;
+  }
+
+  /* Show header-contact in top-bar on desktop */
+  .header-contact.desktop-only {
+    display: block;
+  }
+}
+
+/* Mobile: Hide desktop contact, show separate contact section */
+@media (max-width: 700px) {
+  .header-contact.desktop-only {
+    display: none;
+  }
+
+  .header-contact-section {
+    display: flex;
+  }
+}
+
 .top-bar {
   display: flex;
   justify-content: space-between;
@@ -1971,6 +2075,23 @@ section:nth-of-type(even) {
     flex-shrink: 0;
   }
 
+  .header-contact-section {
+    padding: 0.4rem 2vw;
+  }
+
+  .header-contact-section.scrolled-down {
+    padding: 0.6rem 2vw;
+  }
+
+  .header-contact-compact {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .header-contact-compact .phone-link {
+    font-size: 1.5rem;
+  }
+
   .header-availability {
     font-size: 0.6rem !important;
     margin-bottom: 0.15rem !important;
@@ -3229,6 +3350,22 @@ section:nth-of-type(even) {
 
   .phone-link {
     font-size: 1.4rem;
+  }
+
+  .header-contact-section {
+    padding: 0.3rem 2vw;
+  }
+
+  .header-contact-section.scrolled-down {
+    padding: 0.5rem 2vw;
+  }
+
+  .header-contact-compact .phone-link {
+    font-size: 1.3rem;
+  }
+
+  .header-contact-compact .header-availability {
+    font-size: 0.55rem !important;
   }
 
   .hero-text h1 {
