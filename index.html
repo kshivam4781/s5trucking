@@ -896,7 +896,8 @@
         const scrollingDown = scrollTop > lastScrollTop;
         const scrollingUp = scrollTop < lastScrollTop;
 
-        // If scrolling up (even slightly), show the entire header immediately
+        // Priority 1: If scrolling up (even slightly), show the entire header immediately
+        // This handles the case where user scrolls up from anywhere on the page
         if (scrollingUp) {
           if (headerTopSection) {
             headerTopSection.classList.remove('scrolled-down');
@@ -904,16 +905,9 @@
           if (headerContactSection) {
             headerContactSection.classList.remove('scrolled-down');
           }
-        } else if (scrollingDown && scrollTop > scrollThreshold) {
-          // Only hide when scrolling down past threshold
-          if (headerTopSection) {
-            headerTopSection.classList.add('scrolled-down');
-          }
-          if (headerContactSection) {
-            headerContactSection.classList.add('scrolled-down');
-          }
-        } else if (scrollTop <= scrollThreshold) {
-          // At the top, always show both sections
+        }
+        // Priority 2: If at or near the top, always show both sections
+        else if (scrollTop <= scrollThreshold) {
           if (headerTopSection) {
             headerTopSection.classList.remove('scrolled-down');
           }
@@ -921,6 +915,17 @@
             headerContactSection.classList.remove('scrolled-down');
           }
         }
+        // Priority 3: Only hide when scrolling down AND past threshold
+        else if (scrollingDown && scrollTop > scrollThreshold) {
+          if (headerTopSection) {
+            headerTopSection.classList.add('scrolled-down');
+          }
+          if (headerContactSection) {
+            headerContactSection.classList.add('scrolled-down');
+          }
+        }
+        // Priority 4: If scroll position hasn't changed but we're past threshold,
+        // maintain current state (don't change anything)
 
         lastScrollTop = scrollTop;
       }
