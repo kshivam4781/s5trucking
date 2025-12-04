@@ -53,6 +53,17 @@ main {
   overflow: hidden;
 }
 
+/* On mobile, allow menu to overflow */
+@media (max-width: 968px) {
+  .header-top-section {
+    overflow: visible;
+  }
+  
+  .header-top-section.scrolled-down {
+    overflow: hidden;
+  }
+}
+
 .header-top-section.scrolled-down {
   transform: translateY(-100%);
   opacity: 0;
