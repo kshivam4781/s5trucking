@@ -839,6 +839,7 @@
       // Mobile menu toggle
       const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
       const mainNav = document.getElementById('mainNav');
+      const headerContactSection = document.getElementById('headerContactSection');
       let menuJustOpened = false;
       
       if (mobileMenuToggle && mainNav) {
@@ -856,6 +857,15 @@
           mobileMenuToggle.setAttribute('aria-expanded', willBeExpanded);
           mainNav.classList.toggle('nav-open');
           mobileMenuToggle.classList.toggle('active');
+          
+          // Hide contact section when menu is open on mobile
+          if (headerContactSection && window.innerWidth <= 968) {
+            if (willBeExpanded) {
+              headerContactSection.style.display = 'none';
+            } else {
+              headerContactSection.style.display = '';
+            }
+          }
           
           console.log('Menu toggled. Nav has nav-open:', mainNav.classList.contains('nav-open'));
           
@@ -885,6 +895,11 @@
             mainNav.classList.remove('nav-open');
             mobileMenuToggle.classList.remove('active');
             mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            
+            // Show contact section again when menu is closed
+            if (headerContactSection && window.innerWidth <= 968) {
+              headerContactSection.style.display = '';
+            }
           }
         });
 
@@ -899,6 +914,11 @@
               mainNav.classList.remove('nav-open');
               mobileMenuToggle.classList.remove('active');
               mobileMenuToggle.setAttribute('aria-expanded', 'false');
+              
+              // Show contact section again when menu is closed
+              if (headerContactSection && window.innerWidth <= 968) {
+                headerContactSection.style.display = '';
+              }
             });
           }
         });

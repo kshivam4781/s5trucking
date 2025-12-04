@@ -83,6 +83,8 @@ main {
   opacity: 1;
   max-height: 200px;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 .header-contact-section .header-contact {
@@ -1747,6 +1749,12 @@ section:nth-of-type(even) {
 
 /* Tablet and below */
 @media (max-width: 968px) {
+  /* Ensure menu appears above contact section */
+  .header-contact-section {
+    z-index: 1;
+    position: relative;
+  }
+
   .mobile-menu-toggle {
     display: flex;
     order: 2;
@@ -1781,7 +1789,7 @@ section:nth-of-type(even) {
     overflow: hidden;
     transition: max-height 0.3s ease, padding 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
-    z-index: 1000;
+    z-index: 1001;
     order: 3;
     width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
