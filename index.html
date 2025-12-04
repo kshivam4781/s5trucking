@@ -893,17 +893,27 @@
         }
 
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollingDown = scrollTop > lastScrollTop;
+        const scrollingUp = scrollTop < lastScrollTop;
 
-        if (scrollTop > scrollThreshold) {
-          // Scrolled down - hide company name section, show compact phone
+        // If scrolling up (even slightly), show the entire header immediately
+        if (scrollingUp) {
+          if (headerTopSection) {
+            headerTopSection.classList.remove('scrolled-down');
+          }
+          if (headerContactSection) {
+            headerContactSection.classList.remove('scrolled-down');
+          }
+        } else if (scrollingDown && scrollTop > scrollThreshold) {
+          // Only hide when scrolling down past threshold
           if (headerTopSection) {
             headerTopSection.classList.add('scrolled-down');
           }
           if (headerContactSection) {
             headerContactSection.classList.add('scrolled-down');
           }
-        } else {
-          // Scrolled back to top - show both sections immediately
+        } else if (scrollTop <= scrollThreshold) {
+          // At the top, always show both sections
           if (headerTopSection) {
             headerTopSection.classList.remove('scrolled-down');
           }
