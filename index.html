@@ -16,7 +16,7 @@
     />
     <link rel="icon" href="assets/favicon.svg" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=2.0" />
   </head>
   <body>
     <header class="page-header" aria-label="Main navigation">
@@ -946,7 +946,7 @@
       const scrollThreshold = 100; // Scroll distance before header changes
       const mobileBreakpoint = 700; // Only apply scroll behavior below this width
       const headerTopSection = document.getElementById('headerTopSection');
-      const headerContactSection = document.getElementById('headerContactSection');
+      // headerContactSection already declared above in mobile menu toggle section
 
       function isMobileScreen() {
         return window.innerWidth <= mobileBreakpoint;
