@@ -599,31 +599,78 @@
       // Mobile menu toggle
       const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
       const mainNav = document.getElementById('mainNav');
+      let menuJustOpened = false;
       
       if (mobileMenuToggle && mainNav) {
-        mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation(); // Prevent event from bubbling to document
+          
           const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
-          mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+          const willBeExpanded = !isExpanded;
+          
+          mobileMenuToggle.setAttribute('aria-expanded', willBeExpanded);
           mainNav.classList.toggle('nav-open');
           mobileMenuToggle.classList.toggle('active');
+          
+          // Set flag to prevent immediate close
+          if (willBeExpanded) {
+            menuJustOpened = true;
+            setTimeout(() => {
+              menuJustOpened = false;
+            }, 100);
+          }
         });
 
-        // Close menu when clicking outside
+        // Close menu when clicking outside (with delay to allow button click to process)
         document.addEventListener('click', (e) => {
-          if (!mainNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+          // Don't close if menu was just opened
+          if (menuJustOpened) {
+            return;
+          }
+          
+          // Don't close if clicking on menu or button
+          if (mainNav.contains(e.target) || mobileMenuToggle.contains(e.target)) {
+            return;
+          }
+          
+          // Close the menu
+          if (mainNav.classList.contains('nav-open')) {
             mainNav.classList.remove('nav-open');
             mobileMenuToggle.classList.remove('active');
             mobileMenuToggle.setAttribute('aria-expanded', 'false');
           }
         });
 
-        // Close menu when clicking on a link
+        // Close menu when clicking on a link (but not dropdown parent links)
         const navLinks = mainNav.querySelectorAll('a');
         navLinks.forEach(link => {
-          link.addEventListener('click', () => {
-            mainNav.classList.remove('nav-open');
-            mobileMenuToggle.classList.remove('active');
-            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+          // Don't close menu if clicking on a dropdown parent link
+          const isDropdownParent = link.closest('.nav-dropdown') && link.parentElement.classList.contains('nav-dropdown');
+          
+          if (!isDropdownParent) {
+            link.addEventListener('click', () => {
+              mainNav.classList.remove('nav-open');
+              mobileMenuToggle.classList.remove('active');
+              mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            });
+          }
+        });
+
+        // Handle dropdown toggles on mobile (touch devices)
+        const dropdownParents = mainNav.querySelectorAll('.nav-dropdown > a');
+        dropdownParents.forEach(dropdownLink => {
+          dropdownLink.addEventListener('click', (e) => {
+            // Only prevent default on mobile (when menu is open)
+            if (window.innerWidth <= 968 && mainNav.classList.contains('nav-open')) {
+              e.preventDefault();
+              const dropdown = dropdownLink.nextElementSibling;
+              if (dropdown && dropdown.classList.contains('dropdown-menu')) {
+                const isVisible = dropdown.style.display === 'block' || 
+                                 window.getComputedStyle(dropdown).display === 'block';
+                dropdown.style.display = isVisible ? 'none' : 'block';
+              }
+            }
           });
         });
       }
