@@ -14,6 +14,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   background: var(--white);
@@ -39,10 +43,11 @@ main {
   color: var(--white);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1000;
   padding-bottom: 0;
   border-bottom: 4px solid var(--yellow);
   width: 100%;
+  overflow: visible;
 }
 
 .header-top-section {
@@ -51,6 +56,8 @@ main {
   opacity: 1;
   max-height: 500px;
   overflow: hidden;
+  position: relative;
+  z-index: 1001;
 }
 
 /* On mobile, allow menu to overflow */
@@ -84,7 +91,7 @@ main {
   max-height: 200px;
   overflow: hidden;
   position: relative;
-  z-index: 1;
+  z-index: 1001;
 }
 
 .header-contact-section .header-contact {
@@ -138,6 +145,14 @@ main {
     max-height: 500px !important;
     padding: 0 !important;
     margin: 0 !important;
+    overflow: visible !important;
+  }
+
+  .header-top-section {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    max-height: 500px !important;
+    overflow: visible !important;
   }
 
   /* Hide separate contact section on desktop */
@@ -170,6 +185,8 @@ main {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   flex-wrap: nowrap;
   gap: 1rem;
+  position: relative;
+  z-index: 1002;
 }
 
 .logo {
@@ -205,6 +222,8 @@ main {
   gap: 1.5rem;
   align-items: center;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1003;
 }
 
 .main-nav a {
@@ -261,7 +280,7 @@ main {
   visibility: hidden;
   transform: translateY(-10px);
   transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-  z-index: 1000;
+  z-index: 1004;
   margin-top: 0.5rem;
   padding: 0.5rem 0;
 }
@@ -330,6 +349,7 @@ main {
   min-height: 600px;
   height: 600px;
   overflow: visible;
+  z-index: 1;
 }
 
 .hero-text {
@@ -394,7 +414,7 @@ main {
   right: calc(2vw - 50px);
   width: 750px;
   height: 550px;
-  z-index: 1;
+  z-index: 0;
 }
 
 .hero-state-images img {
@@ -464,6 +484,7 @@ main {
   margin: 0;
   overflow: visible;
   align-self: flex-end;
+  z-index: 0;
 }
 
 /* Services/Repairs page hero visual - ensure proper sizing */
@@ -528,7 +549,7 @@ main {
   outline: none !important;
   transition: opacity 0.6s ease-in-out;
   object-fit: contain;
-  z-index: 1;
+  z-index: 0;
 }
 
 .hero-truck[src*="truck-icon.png"] {
@@ -549,7 +570,7 @@ main {
   outline: none !important;
   transition: opacity 0.6s ease-in-out;
   object-fit: contain;
-  z-index: 1;
+  z-index: 0;
 }
 
 .section-title h2,
@@ -658,6 +679,7 @@ section:nth-of-type(even) {
   position: relative;
   z-index: 1;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  scroll-margin-top: 200px;
 }
 
 .service-card:hover {
